@@ -12,7 +12,6 @@ import java.util.HashSet;
 import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.event.TransformEdit;
 import org.jhotdraw.draw.figure.Figure;
-import org.jhotdraw.utils.undo.CompositeEdit;
 import org.jhotdraw.utils.util.ResourceBundleUtil;
 
 /** Moves the selected figures by one unit. */
@@ -30,7 +29,6 @@ public abstract class MoveAction extends AbstractSelectedAction {
 
   @Override
   public void actionPerformed(java.awt.event.ActionEvent e) {
-    CompositeEdit edit;
     AffineTransform tx = new AffineTransform();
     tx.translate(dx, dy);
     HashSet<Figure> transformedFigures = new HashSet<>();
