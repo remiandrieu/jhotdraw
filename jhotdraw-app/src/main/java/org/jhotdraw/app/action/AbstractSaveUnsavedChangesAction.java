@@ -127,7 +127,6 @@ public abstract class AbstractSaveUnsavedChangesAction extends AbstractViewActio
   protected void saveView(final View v) {
     if (v.getURI() == null) {
       URIChooser chooser = getChooser(v);
-      // int option = fileChooser.showSaveDialog(this);
       JSheet.showSaveSheet(chooser, v.getComponent(), new SheetListener() {
         @Override
         public void optionSelected(final SheetEvent evt) {
