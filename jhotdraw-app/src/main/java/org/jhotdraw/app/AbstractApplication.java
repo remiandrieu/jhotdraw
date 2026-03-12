@@ -495,7 +495,6 @@ public abstract class AbstractApplication extends AbstractBean implements Applic
   }
 
   protected JMenu createOpenRecentFileMenu(View view) {
-    JMenuItem mi;
     JMenu m;
     m = new JMenu();
     labels.configureMenu(
