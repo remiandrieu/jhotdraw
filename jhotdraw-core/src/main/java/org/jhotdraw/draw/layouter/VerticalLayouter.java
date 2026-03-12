@@ -31,9 +31,6 @@ import org.jhotdraw.utils.geom.Insets2D;
  */
 public class VerticalLayouter extends AbstractLayouter {
 
-  /** This alignment is used, when */
-  private Alignment defaultAlignment = Alignment.BLOCK;
-
   @Override
   public Rectangle2D.Double calculateLayout(
       CompositeFigure layoutable, Point2D.Double anchor, Point2D.Double lead, double scale) {
