@@ -58,8 +58,6 @@ public class DnDTracker extends AbstractTool implements DragTracker {
    */
   protected Point2D.Double anchorPoint;
 
-  private boolean isDragging;
-
   public DnDTracker() {}
 
   public DnDTracker(Figure figure) {
