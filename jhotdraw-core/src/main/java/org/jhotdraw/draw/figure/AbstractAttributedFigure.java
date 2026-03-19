@@ -52,6 +52,13 @@ public abstract class AbstractAttributedFigure implements Figure, Cloneable {
 
   private static final long serialVersionUID = 1L;
   protected EventListenerList listenerList = new EventListenerList();
+
+  /**
+   * This variable is used to prevent endless change loops. We increase its value on each invocation
+   * of willChange() and decrease it on each invocation of changed().
+   */
+  protected int changingDepth = 0;
+
   private Drawing drawing;
   private boolean isSelectable = true;
   private boolean isRemovable = true;
@@ -66,12 +73,6 @@ public abstract class AbstractAttributedFigure implements Figure, Cloneable {
   public Attributes attr() {
     return attributes;
   }
-
-  /**
-   * This variable is used to prevent endless change loops. We increase its value on each invocation
-   * of willChange() and decrease it on each invocation of changed().
-   */
-  protected int changingDepth = 0;
 
   @Override
   public void draw(Graphics2D g) {
