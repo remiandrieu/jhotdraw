@@ -57,7 +57,6 @@ public class PrintApplicationFileAction extends PrintFileAction {
     final PrintableView p = (PrintableView) v;
     p.setEnabled(false);
     app.add(p);
-    //            app.show(p);
     new SwingWorker() {
       @Override
       protected Object doInBackground() throws Exception {
