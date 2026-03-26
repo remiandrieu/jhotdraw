@@ -15,6 +15,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.figure.Figure;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 
 /**
  * This is a tracker which supports drag and drop of figures between drawing views and any other
@@ -74,13 +75,13 @@ public class DnDTracker extends AbstractTool implements DragTracker {
     super.mousePressed(evt);
     DrawingView view = getView();
     if (evt.isShiftDown()) {
-      view.setHandleDetailLevel(0);
+      view.setHandleDetailLevel(HandleDetailLevel.BOUNDING_BOX);
       view.toggleSelection(anchorFigure);
       if (!view.isFigureSelected(anchorFigure)) {
         anchorFigure = null;
       }
     } else if (!view.isFigureSelected(anchorFigure)) {
-      view.setHandleDetailLevel(0);
+      view.setHandleDetailLevel(HandleDetailLevel.BOUNDING_BOX);
       view.clearSelection();
       view.addToSelection(anchorFigure);
     }

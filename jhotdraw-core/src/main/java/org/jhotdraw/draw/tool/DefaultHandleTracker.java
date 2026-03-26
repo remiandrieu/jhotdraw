@@ -26,6 +26,7 @@ import org.jhotdraw.draw.event.HandleListener;
 import org.jhotdraw.draw.event.HandleMulticaster;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 
 /**
  * DefaultHandleTracker implements interactions with the handles of a Figure.
@@ -267,7 +268,7 @@ public class DefaultHandleTracker extends AbstractTool implements HandleTracker 
       }
       hoverFigure = f;
       if (hoverFigure != null) {
-        hoverHandles.addAll(hoverFigure.createHandles(-1));
+        hoverHandles.addAll(hoverFigure.createHandles(HandleDetailLevel.HIGHLIGHT));
         for (Handle h : hoverHandles) {
           h.setView(view);
           if (r == null) {

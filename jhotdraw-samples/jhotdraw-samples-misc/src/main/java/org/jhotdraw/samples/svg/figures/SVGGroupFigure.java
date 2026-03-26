@@ -18,6 +18,7 @@ import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.figure.GroupFigure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.samples.svg.SVGAttributeKeys;
 
@@ -94,15 +95,17 @@ public class SVGGroupFigure extends GroupFigure implements SVGFigure {
   }
 
   @Override
-  public LinkedList<Handle> createHandles(int detailLevel) {
+  public LinkedList<Handle> createHandles(HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
     switch (detailLevel) {
-      case -1: // Mouse hover handles
+      case HIGHLIGHT: // Mouse hover handles
         TransformHandleKit.addGroupHoverHandles(this, handles);
         break;
-      case 0:
+      case BOUNDING_BOX:
         TransformHandleKit.addGroupTransformHandles(this, handles);
         handles.add(new LinkHandle(this));
+        break;
+      default:
         break;
     }
     return handles;

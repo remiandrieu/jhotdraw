@@ -34,6 +34,7 @@ import org.jhotdraw.draw.event.FigureEvent;
 import org.jhotdraw.draw.event.FigureListenerAdapter;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.draw.layouter.Layouter;
 import org.jhotdraw.utils.geom.Dimension2DDouble;
@@ -122,9 +123,9 @@ public abstract class AbstractAttributedCompositeFigure extends AbstractAttribut
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     List<Handle> handles = new ArrayList<>();
-    if (detailLevel == 0) {
+    if (detailLevel == HandleDetailLevel.BOUNDING_BOX) {
       handles.add(new BoundsOutlineHandle(this, true, false));
       TransformHandleKit.addScaleMoveTransformHandles(this, handles);
     }

@@ -29,6 +29,7 @@ import org.jhotdraw.draw.figure.AbstractAttributedCompositeFigure;
 import org.jhotdraw.draw.figure.ConnectionFigure;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.samples.odg.Gradient;
 import org.jhotdraw.samples.odg.ODGAttributeKeys;
@@ -298,16 +299,16 @@ public class ODGPathFigure extends AbstractAttributedCompositeFigure implements 
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
-    switch (detailLevel % 2) {
-      case 0:
+    switch (detailLevel) {
+      case BOUNDING_BOX:
         handles.add(new ODGPathOutlineHandle(this));
         for (Figure child : getChildren()) {
           handles.addAll(((ODGBezierFigure) child).createHandles(this, detailLevel));
         }
         break;
-      case 1:
+      case POINT:
         TransformHandleKit.addTransformHandles(this, handles);
         break;
       default:
@@ -437,7 +438,7 @@ public class ODGPathFigure extends AbstractAttributedCompositeFigure implements 
   /** Handles a mouse click. */
   @Override
   public boolean handleMouseClick(Point2D.Double p, MouseEvent evt, DrawingView view) {
-    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() % 2 == 0) {
+    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() == HandleDetailLevel.BOUNDING_BOX) {
       for (Figure child : getChildren()) {
         ODGBezierFigure bf = (ODGBezierFigure) child;
         int index = bf.getBezierPath().findSegment(p, 5f / view.getScaleFactor());

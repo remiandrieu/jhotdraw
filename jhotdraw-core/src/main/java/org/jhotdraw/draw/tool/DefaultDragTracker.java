@@ -16,6 +16,7 @@ import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.event.TransformEdit;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.figure.Origin;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 
 /**
  * <code>DefaultDragTracker</code> implements interactions with the content area of a <code>Figure
@@ -87,13 +88,13 @@ public class DefaultDragTracker extends AbstractTool implements DragTracker {
     super.mousePressed(evt);
     DrawingView view = getView();
     if (evt.isShiftDown()) {
-      view.setHandleDetailLevel(0);
+      view.setHandleDetailLevel(HandleDetailLevel.BOUNDING_BOX);
       view.toggleSelection(anchorFigure);
       if (!view.isFigureSelected(anchorFigure)) {
         anchorFigure = null;
       }
     } else if (!view.isFigureSelected(anchorFigure)) {
-      view.setHandleDetailLevel(0);
+      view.setHandleDetailLevel(HandleDetailLevel.BOUNDING_BOX);
       view.clearSelection();
       view.addToSelection(anchorFigure);
     }

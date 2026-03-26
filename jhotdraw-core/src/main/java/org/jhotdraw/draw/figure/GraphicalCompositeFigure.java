@@ -28,6 +28,7 @@ import org.jhotdraw.draw.Drawing;
 import org.jhotdraw.draw.event.FigureEvent;
 import org.jhotdraw.draw.event.FigureListenerAdapter;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.MoveHandle;
 import org.jhotdraw.utils.geom.Geom;
 
@@ -231,9 +232,9 @@ public class GraphicalCompositeFigure extends AbstractAttributedCompositeFigure 
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     List<Handle> handles = new ArrayList<>();
-    if (detailLevel == 0) {
+    if (detailLevel == HandleDetailLevel.BOUNDING_BOX) {
       MoveHandle.addMoveHandles(this, handles);
     }
     return handles;

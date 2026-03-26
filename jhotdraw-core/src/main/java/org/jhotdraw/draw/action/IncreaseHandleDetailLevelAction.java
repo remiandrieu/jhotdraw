@@ -8,6 +8,7 @@
 package org.jhotdraw.draw.action;
 
 import org.jhotdraw.draw.*;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.utils.util.ResourceBundleUtil;
 
 /** SelectSameAction. */
@@ -33,7 +34,7 @@ public class IncreaseHandleDetailLevelAction extends AbstractSelectedAction {
   public void increaseHandleDetaiLevel() {
     DrawingView view = getView();
     if (view != null) {
-      view.setHandleDetailLevel(view.getHandleDetailLevel() + 1);
+      view.setHandleDetailLevel(HandleDetailLevel.increaseDetailLevel(view.getHandleDetailLevel()));
     }
   }
 }

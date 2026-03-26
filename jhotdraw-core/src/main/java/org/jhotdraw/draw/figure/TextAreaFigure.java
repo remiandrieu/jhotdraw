@@ -30,6 +30,7 @@ import org.jhotdraw.draw.AttributeKeys;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.handle.FontSizeHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TextOverflowHandle;
 import org.jhotdraw.draw.tool.TextAreaEditingTool;
 import org.jhotdraw.draw.tool.Tool;
@@ -440,9 +441,9 @@ public class TextAreaFigure extends AbstractAttributedDecoratedFigure implements
 
   // EVENT HANDLING
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     Collection<Handle> handles = super.createHandles(detailLevel);
-    if (detailLevel == 0) {
+    if (detailLevel == HandleDetailLevel.BOUNDING_BOX) {
       handles.add(new FontSizeHandle(this));
       handles.add(new TextOverflowHandle(this));
     }

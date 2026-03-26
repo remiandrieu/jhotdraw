@@ -28,6 +28,7 @@ import javax.swing.JRadioButtonMenuItem;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.utils.util.ActionUtil;
 
 /**
@@ -305,7 +306,7 @@ public class DelegationSelectionTool extends SelectionTool {
           } else {
             v.clearSelection();
             v.addToSelection(outerFigure);
-            v.setHandleDetailLevel(v.getHandleDetailLevel() + 1);
+            v.setHandleDetailLevel(HandleDetailLevel.increaseDetailLevel(v.getHandleDetailLevel()));
           }
         }
       }
@@ -322,7 +323,7 @@ public class DelegationSelectionTool extends SelectionTool {
     Point pos = new Point(evt.getX(), evt.getY());
     Handle handle = v.findHandle(pos);
     if (handle == null) {
-      v.setHandleDetailLevel(v.getHandleDetailLevel() + 1);
+      v.setHandleDetailLevel(HandleDetailLevel.increaseDetailLevel(v.getHandleDetailLevel()));
     }
   }
 

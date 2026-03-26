@@ -17,6 +17,7 @@ import org.jhotdraw.draw.event.ToolAdapter;
 import org.jhotdraw.draw.event.ToolEvent;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 
 /**
  * Tool to select and manipulate figures.
@@ -262,7 +263,7 @@ public class SelectionTool extends AbstractTool {
         } else {
           if (!evt.isShiftDown()) {
             view.clearSelection();
-            view.setHandleDetailLevel(0);
+            view.setHandleDetailLevel(HandleDetailLevel.BOUNDING_BOX);
           }
           newTracker = getSelectAreaTracker();
         }

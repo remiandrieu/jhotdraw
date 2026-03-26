@@ -16,6 +16,7 @@ import org.jhotdraw.draw.connector.ChopEllipseConnector;
 import org.jhotdraw.draw.connector.Connector;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.ResizeHandleKit;
 import org.jhotdraw.utils.geom.Geom;
 
@@ -151,14 +152,16 @@ public class EllipseFigure extends AbstractAttributedFigure {
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     java.util.List<Handle> handles = new ArrayList<>();
     switch (detailLevel) {
-      case -1:
+      case HIGHLIGHT:
         handles.add(new BoundsOutlineHandle(this, false, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         ResizeHandleKit.addResizeHandles(this, handles, true);
+        break;
+      default:
         break;
     }
     return handles;

@@ -19,6 +19,7 @@ import org.jhotdraw.draw.figure.GraphicalCompositeFigure;
 import org.jhotdraw.draw.figure.LabelFigure;
 import org.jhotdraw.draw.handle.DragHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.MoveHandle;
 import org.jhotdraw.draw.handle.ResizeHandleKit;
 import org.jhotdraw.draw.tool.DelegationSelectionTool;
@@ -47,17 +48,17 @@ public class MovableChildFiguresSampleWithDelegatorDrawingView {
 
     /** Return default handles from the presentation figure. */
     @Override
-    public Collection<Handle> createHandles(int detailLevel) {
+    public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
       LinkedList<Handle> handles = new LinkedList<Handle>();
       switch (detailLevel) {
-        case 0:
+        case BOUNDING_BOX:
           MoveHandle.addMoveHandles(this, handles);
           for (Figure child : getChildren()) {
             MoveHandle.addMoveHandles(child, handles);
             handles.add(new DragHandle(child));
           }
           break;
-        case 1:
+        case POINT:
           ResizeHandleKit.addResizeHandles(this, handles);
           break;
         default:

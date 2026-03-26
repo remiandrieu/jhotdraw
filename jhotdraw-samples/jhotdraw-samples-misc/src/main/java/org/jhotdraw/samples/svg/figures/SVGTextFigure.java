@@ -23,6 +23,7 @@ import org.jhotdraw.draw.figure.TextHolderFigure;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.FontSizeHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.MoveHandle;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.draw.locator.RelativeLocator;
@@ -381,13 +382,13 @@ public class SVGTextFigure extends SVGAttributedFigure implements TextHolderFigu
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
-    switch (detailLevel % 2) {
-      case -1: // Mouse hover handles
+    switch (detailLevel) {
+      case HIGHLIGHT: // Mouse hover handles
         handles.add(new BoundsOutlineHandle(this, false, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new BoundsOutlineHandle(this));
         handles.add(new MoveHandle(this, RelativeLocator.northWest()));
         handles.add(new MoveHandle(this, RelativeLocator.northEast()));
@@ -396,7 +397,7 @@ public class SVGTextFigure extends SVGAttributedFigure implements TextHolderFigu
         handles.add(new FontSizeHandle(this));
         handles.add(new LinkHandle(this));
         break;
-      case 1:
+      case POINT:
         TransformHandleKit.addTransformHandles(this, handles);
         break;
     }

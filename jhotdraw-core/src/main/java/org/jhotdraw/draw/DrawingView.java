@@ -26,6 +26,7 @@ import org.jhotdraw.draw.event.FigureSelectionListener;
 import org.jhotdraw.draw.figure.CompositeFigure;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 
 /**
  * A <em>drawing view</em> paints a {@link Drawing} on a {@code JComponent}.
@@ -331,10 +332,10 @@ public interface DrawingView {
   public void setScaleFactor(double newValue);
 
   /** The detail level of the handles. This is a bound property. */
-  public void setHandleDetailLevel(int newValue);
+  public void setHandleDetailLevel(HandleDetailLevel newValue);
 
   /** Returns the detail level of the handles. This is a bound property. */
-  public int getHandleDetailLevel();
+  public HandleDetailLevel getHandleDetailLevel();
 
   /** Sets the enabled state of the drawing view. This is a bound property. */
   public void setEnabled(boolean newValue);

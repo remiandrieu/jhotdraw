@@ -39,6 +39,7 @@ import org.jhotdraw.draw.event.FigureListener;
 import org.jhotdraw.draw.event.SetBoundsEdit;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.ResizeHandleKit;
 import org.jhotdraw.draw.tool.Tool;
 import org.jhotdraw.utils.geom.Dimension2DDouble;
@@ -319,14 +320,16 @@ public abstract class AbstractAttributedFigure implements Figure, Cloneable {
   public void remap(Map<Figure, Figure> oldToNew, boolean disconnectIfNotInMap) {}
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     List<Handle> handles = new ArrayList<>();
     switch (detailLevel) {
-      case -1:
+      case HIGHLIGHT:
         handles.add(new BoundsOutlineHandle(this, false, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         ResizeHandleKit.addResizeHandles(this, handles);
+        break;
+      default:
         break;
     }
     return handles;

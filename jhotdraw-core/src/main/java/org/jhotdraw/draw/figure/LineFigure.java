@@ -19,6 +19,7 @@ import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.handle.BezierNodeHandle;
 import org.jhotdraw.draw.handle.BezierOutlineHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.utils.geom.path.BezierPath;
 
 /** A {@link Figure} which draws a continuous bezier path between two points. */
@@ -37,17 +38,19 @@ public class LineFigure extends BezierFigure {
   // ATTRIBUTES
   // EDITING
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     List<Handle> handles = new ArrayList<>();
     switch (detailLevel) {
-      case -1: // Mouse hover handles
+      case HIGHLIGHT: // Mouse hover handles
         handles.add(new BezierOutlineHandle(this, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new BezierOutlineHandle(this));
         for (int i = 0, n = path.size(); i < n; i++) {
           handles.add(new BezierNodeHandle(this, i));
         }
+        break;
+      default:
         break;
     }
     return handles;
@@ -61,7 +64,7 @@ public class LineFigure extends BezierFigure {
   /** Handles a mouse click. */
   @Override
   public boolean handleMouseClick(Point2D.Double p, MouseEvent evt, DrawingView view) {
-    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() == 0) {
+    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() == HandleDetailLevel.BOUNDING_BOX) {
       willChange();
       final int index = splitSegment(p, (float) (5f / view.getScaleFactor()));
       if (index != -1) {

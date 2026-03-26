@@ -26,6 +26,7 @@ import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.FontSizeHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.MoveHandle;
 import org.jhotdraw.draw.handle.RotateHandle;
 import org.jhotdraw.draw.locator.RelativeLocator;
@@ -345,13 +346,13 @@ public class TextFigure extends AbstractAttributedDecoratedFigure
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     Collection<Handle> handles = new ArrayList<>();
     switch (detailLevel) {
-      case -1:
+      case HIGHLIGHT:
         handles.add(new BoundsOutlineHandle(this, false, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new BoundsOutlineHandle(this));
         handles.add(new MoveHandle(this, RelativeLocator.northWest()));
         handles.add(new MoveHandle(this, RelativeLocator.northEast()));
@@ -359,7 +360,7 @@ public class TextFigure extends AbstractAttributedDecoratedFigure
         handles.add(new MoveHandle(this, RelativeLocator.southEast()));
         handles.add(new FontSizeHandle(this));
         break;
-      case 1:
+      case POINT:
         handles.add(new BoundsOutlineHandle(this));
         handles.add(new RotateHandle(this) {
           @Override

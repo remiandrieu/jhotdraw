@@ -22,6 +22,7 @@ import org.jhotdraw.draw.handle.BezierOutlineHandle;
 import org.jhotdraw.draw.handle.ConnectionEndHandle;
 import org.jhotdraw.draw.handle.ConnectionStartHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.liner.Liner;
 import org.jhotdraw.utils.geom.path.BezierPath;
 
@@ -99,13 +100,13 @@ public class LineConnectionFigure extends LineFigure implements ConnectionFigure
    * ChangeConnectionHandles at the start and end.
    */
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     ArrayList<Handle> handles = new ArrayList<>(getNodeCount());
     switch (detailLevel) {
-      case -1: // Mouse hover handles
+      case HIGHLIGHT: // Mouse hover handles
         handles.add(new BezierOutlineHandle(this, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new BezierOutlineHandle(this));
         if (getLiner() == null) {
           for (int i = 1, n = getNodeCount() - 1; i < n; i++) {
@@ -114,6 +115,8 @@ public class LineConnectionFigure extends LineFigure implements ConnectionFigure
         }
         handles.add(new ConnectionStartHandle(this));
         handles.add(new ConnectionEndHandle(this));
+        break;
+      default:
         break;
     }
     return handles;

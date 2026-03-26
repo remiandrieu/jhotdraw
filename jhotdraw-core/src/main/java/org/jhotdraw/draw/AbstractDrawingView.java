@@ -79,6 +79,7 @@ import org.jhotdraw.draw.event.HandleEvent;
 import org.jhotdraw.draw.event.HandleListener;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.utils.util.ResourceBundleUtil;
 import org.jhotdraw.utils.util.ReversedList;
 
@@ -111,7 +112,7 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
   private Handle activeHandle;
   private final List<Handle> secondaryHandles = new ArrayList<>();
   private boolean handlesAreValid = true;
-  private int detailLevel;
+  private HandleDetailLevel detailLevel;
   private DrawingEditor editor;
   private JLabel emptyDrawingLabel;
   private boolean paintBackground = true;
@@ -701,10 +702,10 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
             }
           }
         }
-        if (selectionHandles.isEmpty() && detailLevel != 0) {
+        if (selectionHandles.isEmpty() && detailLevel != HandleDetailLevel.BOUNDING_BOX) {
           // No handles are available at the desired detail level.
           // Retry with detail level 0.
-          detailLevel = 0;
+          detailLevel = HandleDetailLevel.BOUNDING_BOX;
           continue;
         }
         break;
@@ -882,7 +883,7 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
   }
 
   @Override
-  public void setHandleDetailLevel(int newValue) {
+  public void setHandleDetailLevel(HandleDetailLevel newValue) {
     if (newValue != detailLevel) {
       detailLevel = newValue;
       invalidateHandles();
@@ -891,7 +892,7 @@ public abstract class AbstractDrawingView implements DrawingView, EditableCompon
   }
 
   @Override
-  public int getHandleDetailLevel() {
+  public HandleDetailLevel getHandleDetailLevel() {
     return detailLevel;
   }
 

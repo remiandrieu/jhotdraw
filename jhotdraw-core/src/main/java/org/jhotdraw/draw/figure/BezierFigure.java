@@ -36,6 +36,7 @@ import org.jhotdraw.draw.handle.BezierNodeHandle;
 import org.jhotdraw.draw.handle.BezierOutlineHandle;
 import org.jhotdraw.draw.handle.BezierScaleHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.utils.geom.Geom;
 import org.jhotdraw.utils.geom.GrowStroke;
@@ -220,19 +221,19 @@ public class BezierFigure extends AbstractAttributedFigure {
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     List<Handle> handles = new ArrayList<>();
-    switch (detailLevel % 2) {
-      case -1: // Mouse hover handles
+    switch (detailLevel) {
+      case HIGHLIGHT: // Mouse hover handles
         handles.add(new BezierOutlineHandle(this, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new BezierOutlineHandle(this));
         for (int i = 0, n = path.size(); i < n; i++) {
           handles.add(new BezierNodeHandle(this, i));
         }
         break;
-      case 1:
+      case POINT:
         TransformHandleKit.addTransformHandles(this, handles);
         handles.add(new BezierScaleHandle(this));
         break;
@@ -630,7 +631,7 @@ public class BezierFigure extends AbstractAttributedFigure {
   /** Handles a mouse click. */
   @Override
   public boolean handleMouseClick(Point2D.Double p, MouseEvent evt, DrawingView view) {
-    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() % 2 == 0) {
+    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() == HandleDetailLevel.BOUNDING_BOX) {
       willChange();
       final int index = splitSegment(p, 5f / view.getScaleFactor());
       if (index != -1) {

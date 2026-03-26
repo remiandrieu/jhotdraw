@@ -59,6 +59,7 @@ import org.jhotdraw.draw.event.HandleEvent;
 import org.jhotdraw.draw.event.HandleListener;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.io.DefaultDrawingViewTransferHandler;
 import org.jhotdraw.utils.util.ResourceBundleUtil;
 import org.jhotdraw.utils.util.ReversedList;
@@ -98,7 +99,7 @@ public class DefaultDrawingView extends JComponent implements DrawingView, Edita
   private transient Dimension cachedPreferredSize;
   private double scaleFactor = 1;
   private Point translation = new Point(0, 0);
-  private int detailLevel;
+  private HandleDetailLevel detailLevel;
   private DrawingEditor editor;
   private JLabel emptyDrawingLabel;
   protected BufferedImage backgroundTile;
@@ -1008,10 +1009,10 @@ public class DefaultDrawingView extends JComponent implements DrawingView, Edita
             }
           }
         }
-        if (selectionHandles.size() == 0 && detailLevel != 0) {
+        if (selectionHandles.size() == 0 && detailLevel != HandleDetailLevel.BOUNDING_BOX) {
           // No handles are available at the desired detail level.
           // Retry with detail level 0.
-          detailLevel = 0;
+          detailLevel = HandleDetailLevel.BOUNDING_BOX;
           continue;
         }
         break;
@@ -1305,7 +1306,7 @@ public class DefaultDrawingView extends JComponent implements DrawingView, Edita
   }
 
   @Override
-  public void setHandleDetailLevel(int newValue) {
+  public void setHandleDetailLevel(HandleDetailLevel newValue) {
     if (newValue != detailLevel) {
       detailLevel = newValue;
       invalidateHandles();
@@ -1314,7 +1315,7 @@ public class DefaultDrawingView extends JComponent implements DrawingView, Edita
   }
 
   @Override
-  public int getHandleDetailLevel() {
+  public HandleDetailLevel getHandleDetailLevel() {
     return detailLevel;
   }
 

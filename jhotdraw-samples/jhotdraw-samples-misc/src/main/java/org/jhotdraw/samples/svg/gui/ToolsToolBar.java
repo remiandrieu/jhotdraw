@@ -21,6 +21,7 @@ import org.jhotdraw.draw.AttributeKeys;
 import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.action.*;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.tool.CreationTool;
 import org.jhotdraw.draw.tool.TextAreaCreationTool;
 import org.jhotdraw.draw.tool.TextCreationTool;
@@ -249,7 +250,8 @@ public class ToolsToolBar extends AbstractToolBar {
       if (wasSelectedOnPressed) {
         DrawingView view = editor.getActiveView();
         if (view != null) {
-          view.setHandleDetailLevel(view.getHandleDetailLevel() + 1);
+          view.setHandleDetailLevel(
+              HandleDetailLevel.increaseDetailLevel(view.getHandleDetailLevel()));
         }
       }
     }

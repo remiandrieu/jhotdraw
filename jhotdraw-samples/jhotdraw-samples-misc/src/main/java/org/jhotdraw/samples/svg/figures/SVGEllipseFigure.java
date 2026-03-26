@@ -17,6 +17,7 @@ import java.util.*;
 import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.ResizeHandleKit;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.samples.svg.Gradient;
@@ -202,17 +203,17 @@ public class SVGEllipseFigure extends SVGAttributedFigure implements SVGFigure {
   // ATTRIBUTES
   // EDITING
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
-    switch (detailLevel % 2) {
-      case -1: // Mouse hover handles
+    switch (detailLevel) {
+      case HIGHLIGHT: // Mouse hover handles
         handles.add(new BoundsOutlineHandle(this, false, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         ResizeHandleKit.addResizeHandles(this, handles);
         handles.add(new LinkHandle(this));
         break;
-      case 1:
+      case POINT:
         TransformHandleKit.addTransformHandles(this, handles);
         break;
       default:

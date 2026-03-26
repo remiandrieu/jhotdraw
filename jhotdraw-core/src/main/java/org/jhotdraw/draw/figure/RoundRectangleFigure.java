@@ -17,6 +17,7 @@ import org.jhotdraw.draw.AttributeKeys;
 import org.jhotdraw.draw.connector.ChopRoundRectangleConnector;
 import org.jhotdraw.draw.connector.Connector;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.RoundRectangleRadiusHandle;
 import org.jhotdraw.utils.geom.Geom;
 
@@ -162,7 +163,7 @@ public class RoundRectangleFigure extends AbstractAttributedFigure {
 
   // EDITING
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     Collection<Handle> handles = super.createHandles(detailLevel);
     handles.add(new RoundRectangleRadiusHandle(this));
     return handles;

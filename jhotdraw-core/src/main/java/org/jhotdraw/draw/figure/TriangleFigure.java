@@ -17,6 +17,7 @@ import org.jhotdraw.draw.AttributeKeys.Orientation;
 import org.jhotdraw.draw.connector.ChopTriangleConnector;
 import org.jhotdraw.draw.connector.Connector;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.OrientationHandle;
 import org.jhotdraw.utils.geom.Geom;
 import org.jhotdraw.utils.geom.GrowStroke;
@@ -98,9 +99,9 @@ public class TriangleFigure extends AbstractAttributedFigure {
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     var handles = super.createHandles(detailLevel);
-    if (detailLevel == 0) {
+    if (detailLevel == HandleDetailLevel.BOUNDING_BOX) {
       handles.add(new OrientationHandle(this));
     }
     return handles;

@@ -28,6 +28,7 @@ import org.jhotdraw.draw.AttributeKeys.WindingRule;
 import org.jhotdraw.draw.figure.AbstractAttributedCompositeFigure;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.samples.svg.Gradient;
 import org.jhotdraw.samples.svg.SVGAttributeKeys;
@@ -324,20 +325,20 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
-    switch (detailLevel % 2) {
-      case -1: // Mouse hover handles
+    switch (detailLevel) {
+      case HIGHLIGHT: // Mouse hover handles
         handles.add(new SVGPathOutlineHandle(this, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new SVGPathOutlineHandle(this));
         for (Figure child : getChildren()) {
           handles.addAll(((SVGBezierFigure) child).createHandles(this, detailLevel));
         }
         handles.add(new LinkHandle(this));
         break;
-      case 1:
+      case POINT:
         TransformHandleKit.addTransformHandles(this, handles);
         break;
       default:
@@ -465,7 +466,7 @@ public class SVGPathFigure extends AbstractAttributedCompositeFigure implements 
   /** Handles a mouse click. */
   @Override
   public boolean handleMouseClick(Point2D.Double p, MouseEvent evt, DrawingView view) {
-    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() % 2 == 0) {
+    if (evt.getClickCount() == 2 && view.getHandleDetailLevel() == HandleDetailLevel.BOUNDING_BOX) {
       for (Figure child : getChildren()) {
         SVGBezierFigure bf = (SVGBezierFigure) child;
         int index = bf.findSegment(p, 5f / view.getScaleFactor());

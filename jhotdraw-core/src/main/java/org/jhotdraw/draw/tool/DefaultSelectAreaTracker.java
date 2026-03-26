@@ -23,6 +23,7 @@ import org.jhotdraw.draw.DrawingEditor;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 
 /**
  * <code>DefaultSelectAreaTracker</code> implements interactions with the background area of a
@@ -184,7 +185,7 @@ public class DefaultSelectAreaTracker extends AbstractTool implements SelectArea
       }
       hoverFigure = f;
       if (hoverFigure != null && f.isSelectable()) {
-        hoverHandles.addAll(hoverFigure.createHandles(-1));
+        hoverHandles.addAll(hoverFigure.createHandles(HandleDetailLevel.HIGHLIGHT));
         for (Handle h : hoverHandles) {
           h.setView(view);
           if (r == null) {

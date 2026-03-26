@@ -18,6 +18,7 @@ import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.figure.BezierFigure;
 import org.jhotdraw.draw.handle.BezierNodeHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.utils.geom.path.BezierPath;
 
@@ -39,15 +40,15 @@ public class ODGBezierFigure extends BezierFigure {
     attr().set(UNCLOSED_PATH_FILLED, true);
   }
 
-  public Collection<Handle> createHandles(ODGPathFigure pathFigure, int detailLevel) {
+  public Collection<Handle> createHandles(ODGPathFigure pathFigure, HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
-    switch (detailLevel % 2) {
-      case 0:
+    switch (detailLevel) {
+      case BOUNDING_BOX:
         for (int i = 0, n = path.size(); i < n; i++) {
           handles.add(new BezierNodeHandle(this, i, pathFigure));
         }
         break;
-      case 1:
+      case POINT:
         TransformHandleKit.addTransformHandles(this, handles);
         break;
       default:

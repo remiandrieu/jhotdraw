@@ -21,6 +21,7 @@ import org.jhotdraw.draw.figure.TextFigure;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.ConnectorHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.MoveHandle;
 import org.jhotdraw.draw.locator.RelativeLocator;
 import org.jhotdraw.utils.geom.Geom;
@@ -61,13 +62,13 @@ public class NodeFigure extends TextFigure {
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     java.util.List<Handle> handles = new LinkedList<Handle>();
     switch (detailLevel) {
-      case -1:
+      case HIGHLIGHT:
         handles.add(new BoundsOutlineHandle(getDecorator(), false, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new MoveHandle(this, RelativeLocator.northWest()));
         handles.add(new MoveHandle(this, RelativeLocator.northEast()));
         handles.add(new MoveHandle(this, RelativeLocator.southWest()));
@@ -75,6 +76,8 @@ public class NodeFigure extends TextFigure {
         for (Connector c : connectors) {
           handles.add(new ConnectorHandle(c, new LineConnectionFigure()));
         }
+        break;
+      default:
         break;
     }
     return handles;

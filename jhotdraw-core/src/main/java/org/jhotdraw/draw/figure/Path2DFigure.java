@@ -16,6 +16,7 @@ import java.util.*;
 import org.jhotdraw.draw.AttributeKeys;
 import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TrackingHandle;
 import org.jhotdraw.utils.geom.GrowStroke;
 import org.jhotdraw.utils.geom.path.MutablePath2D;
@@ -35,13 +36,14 @@ public class Path2DFigure extends AbstractAttributedFigure {
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
-    if (detailLevel == -1 || detailLevel == 0) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
+    if (detailLevel == HandleDetailLevel.HIGHLIGHT
+        || detailLevel == HandleDetailLevel.BOUNDING_BOX) {
       return super.createHandles(detailLevel);
     } else {
       List<Handle> handles = new ArrayList<>();
       switch (detailLevel) {
-        case 1:
+        case POINT:
           for (int i = 0; i < path.size(); i++) {
             int idx = i;
             handles.add(new TrackingHandle(
@@ -49,6 +51,8 @@ public class Path2DFigure extends AbstractAttributedFigure {
                 () -> path.getNodePoint(idx),
                 p -> path.changeNode(idx, node -> node.withPoint(p.x, p.y))));
           }
+          break;
+        default:
           break;
       }
       return handles;

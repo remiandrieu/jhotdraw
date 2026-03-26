@@ -18,6 +18,7 @@ import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.figure.GroupFigure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.samples.odg.ODGAttributeKeys;
 
@@ -94,9 +95,9 @@ public class ODGGroupFigure extends GroupFigure implements ODGFigure {
   }
 
   @Override
-  public LinkedList<Handle> createHandles(int detailLevel) {
+  public LinkedList<Handle> createHandles(HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
-    if (detailLevel == 0) {
+    if (detailLevel == HandleDetailLevel.BOUNDING_BOX) {
       TransformHandleKit.addTransformHandles(this, handles);
     }
     return handles;

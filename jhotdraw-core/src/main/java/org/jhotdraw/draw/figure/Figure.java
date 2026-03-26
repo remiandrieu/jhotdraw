@@ -21,6 +21,7 @@ import org.jhotdraw.draw.DrawingView;
 import org.jhotdraw.draw.connector.Connector;
 import org.jhotdraw.draw.event.FigureListener;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.tool.Tool;
 import org.jhotdraw.utils.geom.Dimension2DDouble;
 
@@ -305,13 +306,13 @@ public interface Figure extends AttributeProvider, Cloneable, Serializable {
   /**
    * Creates handles used to manipulate the figure.
    *
-   * @param detailLevel The detail level of the handles. Usually this is 0 for bounding box handles
-   *     and 1 for point handles. The value -1 is used by the SelectAreaTracker and the
+   * @param detailLevel The detail level of the handles. Usually it's BOUNDING_BOX for bounding box handles
+   *     and POINT for point handles. HIGHLIGHT is used by the SelectAreaTracker and the
    *     HandleTracker to highlight figures, over which the mouse pointer is hovering.
    * @return a Collection of handles
    * @see Handle
    */
-  public Collection<Handle> createHandles(int detailLevel);
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel);
 
   /** Returns a cursor for the specified location. */
   public Cursor getCursor(Point2D.Double p, double scale);

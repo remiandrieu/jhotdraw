@@ -20,6 +20,7 @@ import org.jhotdraw.draw.figure.TextFigure;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.ConnectorHandle;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.MoveHandle;
 import org.jhotdraw.draw.layouter.VerticalLayouter;
 import org.jhotdraw.draw.locator.RelativeLocator;
@@ -114,13 +115,13 @@ public class TaskFigure extends GraphicalCompositeFigure {
   }
 
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     java.util.List<Handle> handles = new LinkedList<Handle>();
     switch (detailLevel) {
-      case -1:
+      case HIGHLIGHT:
         handles.add(new BoundsOutlineHandle(getPresentationFigure(), false, true));
         break;
-      case 0:
+      case BOUNDING_BOX:
         handles.add(new MoveHandle(this, RelativeLocator.northWest()));
         handles.add(new MoveHandle(this, RelativeLocator.northEast()));
         handles.add(new MoveHandle(this, RelativeLocator.southWest()));
@@ -130,6 +131,8 @@ public class TaskFigure extends GraphicalCompositeFigure {
             ch = new ConnectorHandle(
                 new LocatorConnector(this, RelativeLocator.east()), new DependencyFigure()));
         ch.setToolTipText("Drag the connector to a dependent task.");
+        break;
+      default:
         break;
     }
     return handles;

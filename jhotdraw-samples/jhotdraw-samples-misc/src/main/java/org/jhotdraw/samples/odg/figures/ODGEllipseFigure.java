@@ -17,6 +17,7 @@ import org.jhotdraw.draw.*;
 import org.jhotdraw.draw.connector.Connector;
 import org.jhotdraw.draw.figure.ConnectionFigure;
 import org.jhotdraw.draw.handle.Handle;
+import org.jhotdraw.draw.handle.HandleDetailLevel;
 import org.jhotdraw.draw.handle.ResizeHandleKit;
 import org.jhotdraw.draw.handle.TransformHandleKit;
 import org.jhotdraw.samples.odg.Gradient;
@@ -188,13 +189,13 @@ public class ODGEllipseFigure extends ODGAttributedFigure implements ODGFigure {
   // ATTRIBUTES
   // EDITING
   @Override
-  public Collection<Handle> createHandles(int detailLevel) {
+  public Collection<Handle> createHandles(HandleDetailLevel detailLevel) {
     LinkedList<Handle> handles = new LinkedList<Handle>();
-    switch (detailLevel % 2) {
-      case 0:
+    switch (detailLevel) {
+      case BOUNDING_BOX:
         ResizeHandleKit.addResizeHandles(this, handles);
         break;
-      case 1:
+      case HIGHLIGHT:
         TransformHandleKit.addTransformHandles(this, handles);
         break;
       default:
