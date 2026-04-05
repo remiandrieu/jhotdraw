@@ -25,6 +25,24 @@ import java.awt.color.ColorSpace;
  * a = C * cos(H)
  * b = C * sin(H)
  * </pre>
+ *
+ * <p>The variable names used in this implementation follow the standard CIE Lab / XYZ conversion
+ * notation. In particular:
+ * <ul>
+ *   <li><b>L</b>, <b>C</b>, <b>H</b> are lightness, chroma, and hue angle in the CIELCH space.</li>
+ *   <li><b>a</b>, <b>b</b> are the Cartesian Lab coordinates converted from C and H.</li>
+ *   <li><b>fx</b>, <b>fy</b>, <b>fz</b> are the intermediate nonlinear Lab transfer function values.</li>
+ *   <li><b>xr</b>, <b>yr</b>, <b>zr</b> are the normalized XYZ values relative to the reference white.
+ *   The reference white is D65 for this implementation.</li>
+ *   <li><b>EPS</b> and <b>K</b> are the constants used for the Lab pivot function.</li>
+ * </ul>
+ *
+ * <p>See the conversion equations for these formulas at:
+ * <ul>
+ *   <li><a href="http://www.brucelindbloom.com/index.html?Eqn_Lab_to_XYZ.html">Bruce Lindbloom: Lab to XYZ</a></li>
+ *   <li><a href="http://www.brucelindbloom.com/index.html?Eqn_XYZ_to_Lab.html">Bruce Lindbloom: XYZ to Lab</a></li>
+ *   <li><a href="http://www.w3.org/Graphics/Color/sRGB.html">W3C sRGB color space</a></li>
+ * </ul>
  */
 public class CIELCHabColorSpace extends AbstractNamedColorSpace {
 
