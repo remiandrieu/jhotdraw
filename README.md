@@ -36,6 +36,27 @@ This projects jars are not yet published to maven central or GitHub packages. To
 In module `jhotdraw-samples-mini` are small examples mostly highlighting one aspect of JHotdraw usage.
 Additional to that are in module `jhotdraw-samples-misc` more sophisticated examples of using this library.
 
+## Development
+
+### Adding a New Rectangular Figure
+
+JHotDraw allows easy addition of custom figures. For a figure representable in a rectangle (e.g., rectangle, ellipse, image):
+
+1. **Choose base class**:
+   - Extend `AbstractAttributedFigure` for simple figures.
+   - Extend `AbstractAttributedDecoratedFigure` for figures with borders/decorations.
+
+2. **Implement abstract methods**:
+   - `drawFill(Graphics2D g)`: Draw fill.
+   - `drawStroke(Graphics2D g)`: Draw stroke.
+   - `contains(Point2D.Double p, double scale)`: Check point containment.
+   - `setBounds(Point2D.Double anchor, Point2D.Double lead)`: Set bounds.
+   - `getBounds(double scale)`: Get bounds.
+
+3. **Reuse common methods**:
+   - Copy `transform(AffineTransform tx)` and `setBounds` from existing classes like `RectangleFigure`
+
+See `RectangleFigure.java`, `EllipseFigure.java`, or `ImageFigure.java` for examples.
 
 ## License
 
