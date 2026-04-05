@@ -8,9 +8,7 @@
 package org.jhotdraw.draw.figure;
 
 import static org.jhotdraw.draw.AttributeKeys.*;
-import static org.jhotdraw.draw.AttributeKeys.StrokePlacement.CENTER;
 import static org.jhotdraw.draw.AttributeKeys.StrokePlacement.INSIDE;
-import static org.jhotdraw.draw.AttributeKeys.StrokePlacement.OUTSIDE;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -308,17 +306,10 @@ public class GraphicalCompositeFigure extends AbstractAttributedCompositeFigure 
     Rectangle2D.Double r = getBounds();
     if (attr().get(STROKE_COLOR) != null) {
       double grow;
-      switch (attr().get(STROKE_PLACEMENT)) {
-        case CENTER:
-        default:
-          grow = AttributeKeys.getStrokeTotalWidth(this, AttributeKeys.scaleFromContext(this));
-          break;
-        case OUTSIDE:
-          grow = AttributeKeys.getStrokeTotalWidth(this, AttributeKeys.scaleFromContext(this));
-          break;
-        case INSIDE:
-          grow = 0d;
-          break;
+      if (attr().get(STROKE_PLACEMENT) == INSIDE) {
+        grow = 0d;
+      } else {
+        grow = AttributeKeys.getStrokeTotalWidth(this, AttributeKeys.scaleFromContext(this));
       }
       Geom.grow(r, grow, grow);
     }
