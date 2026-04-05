@@ -2,6 +2,10 @@
 
 [![Java CI with Maven](https://github.com/wumpz/jhotdraw/actions/workflows/maven.yml/badge.svg)](https://github.com/wumpz/jhotdraw/actions/workflows/maven.yml)
 
+## Introduction
+
+JHotDraw is a Java library for creating structured drawing editors. It provides a framework for building applications that allow users to create, edit, and manipulate graphical figures such as rectangles, ellipses, and custom shapes. Common use cases include simple doodle programs, diagramming tools or vector graphics editors.
+
 ## News
 
 > **ATTENTION**: Due to the refactoring in 10.0-SNAPSHOT this version breaks API of JHotdraw. Some adaptions are needed, e.g.: attributes now using `attr()`, ...
