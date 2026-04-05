@@ -27,6 +27,8 @@ JHotDraw is a Java library for creating structured drawing editors. It provides 
 
 ## Quickstart
 
+**Prerequisites**: Java Development Kit (JDK) 17 or later, Apache Maven 3.6 or later.
+
 This projects jars are not yet published to maven central or GitHub packages. To use those you first need to build it with **maven** using: `mv clean install`. Now all jars are published to your local maven repository. And you can include those artifacts using e.g.
 
 ```xml
