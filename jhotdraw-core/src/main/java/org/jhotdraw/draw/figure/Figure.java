@@ -456,6 +456,16 @@ public interface Figure extends AttributeProvider, Cloneable, Serializable {
    */
   public boolean handleDrop(Point2D.Double p, Collection<Figure> droppedFigures, DrawingView view);
 
+  /**
+   * Handles a mouse click on the figure.
+   *
+   * <p>This method is called when the user clicks on the figure in a {@link DrawingView}.
+   *
+   * @param p The location of the mouse event.
+   * @param evt The mouse event.
+   * @param view The drawing view which is the source of the mouse event.
+   * @return Returns true, if the click was handled by the figure.
+   */
   public boolean handleMouseClick(Point2D.Double p, MouseEvent evt, DrawingView view);
 
   public void addFigureListener(FigureListener l);
