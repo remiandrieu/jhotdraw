@@ -36,7 +36,6 @@ import org.jhotdraw.draw.connector.ChopRectangleConnector;
 import org.jhotdraw.draw.connector.Connector;
 import org.jhotdraw.draw.event.FigureEvent;
 import org.jhotdraw.draw.event.FigureListener;
-import org.jhotdraw.draw.event.SetBoundsEdit;
 import org.jhotdraw.draw.handle.BoundsOutlineHandle;
 import org.jhotdraw.draw.handle.Handle;
 import org.jhotdraw.draw.handle.HandleDetailLevel;
@@ -348,18 +347,6 @@ public abstract class AbstractAttributedFigure implements Figure, Cloneable {
     setBounds(
         new Point2D.Double(bounds.x, bounds.y),
         new Point2D.Double(bounds.x + bounds.width, bounds.y + bounds.height));
-  }
-
-  @Override
-  public void setBounds(Point2D.Double anchor, Point2D.Double lead) {
-    Point2D.Double oldAnchor = getStartPoint();
-    Point2D.Double oldLead = getEndPoint();
-    if (!oldAnchor.equals(anchor) || !oldLead.equals(lead)) {
-      willChange();
-      setBounds(anchor, lead);
-      changed();
-      fireUndoableEditHappened(new SetBoundsEdit(this, oldAnchor, oldLead, anchor, lead));
-    }
   }
 
   /**

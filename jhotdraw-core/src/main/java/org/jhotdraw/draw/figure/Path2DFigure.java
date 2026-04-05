@@ -65,6 +65,11 @@ public class Path2DFigure extends AbstractAttributedFigure {
   }
 
   @Override
+  public void setBounds(Point2D.Double start, Point2D.Double end) {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  @Override
   public Object getTransformRestoreData() {
     throw new UnsupportedOperationException("Not supported yet."); // Generated from
     // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

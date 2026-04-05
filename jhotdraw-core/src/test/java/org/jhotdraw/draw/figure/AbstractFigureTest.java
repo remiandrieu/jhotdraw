@@ -62,6 +62,9 @@ public class AbstractFigureTest {
     }
 
     @Override
+    public void setBounds(Point2D.Double start, Point2D.Double end) {}
+
+    @Override
     public boolean contains(Point2D.Double p) {
       return true;
     }
